@@ -5,7 +5,7 @@ In September 2021, FlightAware released version 6.0 of their PiAware software. A
 
 This script will allow a user to see a listing of the changing adaptive gain values from such a setup.
 
-Currently, this script has only been verified with FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
+Currently, this script has only been verified with versions 6.x and 7.x of FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
 
 An example of this scipt listing the recent adaptive gain values:
 
