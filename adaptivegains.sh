@@ -2,9 +2,9 @@
 
 # Script to display the adaptive gain values used by FlightAware's dump1090-fa ver 6.0 and higher if the Adaptive Gain mode is enabled.
 # https://github.com/mypiaware/flightaware_adaptive_gain_listing/
-# Version 1.1
+# Version 1.2
 
-VERSION="1.1"
+VERSION="1.2"
 
 SCRIPTNAME=`basename "$0"`  # Get the name of this script in the event it has been changed from the default name of 'adaptivegains'.
 
@@ -21,8 +21,8 @@ if [[ $1 =~ ^-\?$ ]] || [[ $1 =~ ^--?help$ ]]; then
 fi
 
 # Check if dump1090-fa is installed and its version is at least 6.0.
-if  ! [[ $(dump1090-fa --version 2> /dev/null) =~ dump1090-fa[[:space:]]+[67] ]]; then
-   printf "\033[1;31mdump1090-fa version 6.x or 7.x must be installed!\033[0m\n"
+if  ! [[ $(dump1090-fa --version 2> /dev/null) =~ dump1090-fa[[:space:]]+[678] ]]; then
+   printf "\033[1;31mdump1090-fa version 6.x, 7.x or 8.x must be installed!\033[0m\n"
    exit 1
 fi
 
@@ -49,7 +49,7 @@ fi
 
 # Save all available recorded gain values along with timestamps to a TIMESGAINS array.
 declare -a TIMESGAINS
-OLDESTBOOT="$(($(sudo journalctl --list-boots | wc -l)-1))"  # Numeric value of oldest boot.  (Only relevant if 'Storage=persistent' is set in the '/etc/systemd/journald.conf' file.)
+OLDESTBOOT="$(($(sudo journalctl --list-boots | wc -l)-1))"  # Numeric value of oldest boot.  (Only relevant if storage is set to persistent.)
 LINECOUNT=0
 for (( b=$OLDESTBOOT; b>=0; b-- )); do
    LOGOUTPUT="$(sudo journalctl -u dump1090-fa.service -b -$b --lines=all --no-hostname --no-pager 2> /dev/null)"
