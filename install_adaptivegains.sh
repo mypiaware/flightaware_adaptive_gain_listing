@@ -5,7 +5,7 @@
 
 AGCMD="/usr/local/bin/adaptivegains"
 URL="https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/adaptivegains.sh"
-CHECKSUM="318c84dd2d413ea440b20dce66f3ca09"  # Checksum of 'adaptivegains.sh' (verson 1.1).
+CHECKSUM="ffd66b18206d4465d7733e3c3a7ff2f2"  # Checksum of 'adaptivegains.sh' (verson 1.2).  [Needs to be all lowercase]
 
 if ! [ -f "$AGCMD" ]; then
    while ! [[ $USERCHOICE =~ ^[YyNn]$ ]]; do printf "Download & install the 'adaptivegains' command? [y/n]: "; read USERCHOICE; done
