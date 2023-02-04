@@ -5,15 +5,15 @@ In September 2021, FlightAware released version 6.0 of their PiAware software. A
 
 This script will allow a user to see a listing of the changing adaptive gain values from such a setup.
 
-Currently, this script has only been verified with versions 6.x and 7.x of FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
+Currently, this script has only been verified with versions 6.x, 7.x and 8.x of FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
 
-An example of this scipt listing the recent adaptive gain values:
+An example of this script listing the recent adaptive gain values:
 
 ![Adaptive Gains Listing](https://i.imgur.com/JX1orE5.png)
 
 
 ## How to Install
-Execute this one command line. The operating system will then have a global command called `adaptivegains`.
+Execute this one command line. The operating system will then have a global command called `adaptivegains`. This command will also update `adaptivegains` if it is already installed and an update is available.
 ```
 bash -c "$(wget -qO - https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/install_adaptivegains.sh)"
 ```
@@ -48,21 +48,23 @@ In order to get a listing of adaptive gains from dump1090-fa, the Adaptive Gain 
   
 
 ## To View More Gain Values
-(This is for experts only.) By default, the logs from dump1090-fa will only contain the most recent gain values - possibly from less than 24 hours ago - and will also only contain the gain values from the most recent boot.
+:point_right: Everything below is for experts only!
 
-If wanting to see an exhaustive listing of adaptive gain values from dump1090-fa - including gain values from previous boots, then the following change will need to be made to the journald configuration file.  The following works for both the package installation and SD card image.  Before the first edit of the configuration file is done, a copy of the original configuration file should be made first.  This should only be done one time with the following command:
+By default, the logs from dump1090-fa will only contain the most recent gain values - possibly from less than 24 hours ago - and will also only contain the gain values from the most recent boot.
+
+If wanting to see an exhaustive listing of adaptive gain values from dump1090-fa - including gain values from previous boots, then the following change will need to be made to the journald configuration file.  The following works for both the package installation and SD card image.  Before the first edit of the configuration file is done, a copy of the original configuration file should be made first.  This should only be done one time with the following one-line command:
 ```
 if [ ! -f /etc/systemd/journald.conf.original ]; then sudo cp /etc/systemd/journald.conf /etc/systemd/journald.conf.original; fi
 ```  
 Make a small edit to the configuration file and restart the journald service with these three commands:
 ```
-sudo sed -i 's/.*Storage[[:space:]]*=.*//' /etc/systemd/journald.conf
-echo 'Storage=persistent' | sudo tee -a /etc/systemd/journald.conf
+sudo sed -i '/.*Storage[[:space:]]*=/d' /etc/systemd/journald.conf
+sudo sed -i 's/^[[:space:]]*\[Journal\].*/\[Journal\]\nStorage=persistent/' /etc/systemd/journald.conf
 sudo systemctl restart systemd-journald
 ```
 From this point on, the `adaptivegains` command will start displaying all of the recent gain values from the current boot and from any of the subsequent boots of the system.
 
-<h3><b>:x: WARNING</b> :x: <b>WARNING</b> :x: <b>WARNING :x:</b></h3>
+<h3><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:x: WARNING</b> :x: <b>WARNING</b> :x: <b>WARNING :x:</b></h3>
 
 Although the steps above may provide a very lengthy list of gain values, there are at least two consequences to know about:
 * The log files will be continually written to the disk as opposed to volatile memory.
