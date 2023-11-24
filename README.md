@@ -15,7 +15,7 @@ An example of this script listing the recent adaptive gain values:
 ## How to Install
 Execute this one command line. The operating system will then have a global command called `adaptivegains`. This command will also update `adaptivegains` if it is already installed and an update is available.
 ```
-bash -c "$(wget -qO - https://github.com/mypiaware/temp/raw/master/install_adaptivegains.sh)"
+bash -c "$(wget -qO - https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/install_adaptivegains.sh)"
 ```
 
 
