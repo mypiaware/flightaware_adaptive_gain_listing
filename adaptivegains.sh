@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to display the adaptive gain values used by FlightAware's dump1090-fa ver 6.0 and higher if the Adaptive Gain mode is enabled.
+# A script to display the adaptive gain values used by FlightAware's dump1090-fa ver 6.0 and higher if the Adaptive Gain mode is enabled.
 # https://github.com/mypiaware/flightaware_adaptive_gain_listing/
 # Version 2.0
 
