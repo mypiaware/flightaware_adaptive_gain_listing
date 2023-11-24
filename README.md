@@ -5,7 +5,7 @@ In September 2021, FlightAware released version 6.0 of their PiAware software. A
 
 This script will allow a user to see a listing of the changing adaptive gain values from such a setup.
 
-Currently, this script has only been verified with versions 6.x, 7.x and 8.x of FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
+Currently, this script has only been verified with versions 6.0 through 9.0 of FlightAware's package installation on a Raspberry Pi OS operating system and with FlightAware's PiAware SD card image.
 
 An example of this script listing the recent adaptive gain values:
 
@@ -15,7 +15,7 @@ An example of this script listing the recent adaptive gain values:
 ## How to Install
 Execute this one command line. The operating system will then have a global command called `adaptivegains`. This command will also update `adaptivegains` if it is already installed and an update is available.
 ```
-bash -c "$(wget -qO - https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/install_adaptivegains.sh)"
+bash -c "$(wget -qO - https://github.com/mypiaware/temp/raw/master/install_adaptivegains.sh)"
 ```
 
 
