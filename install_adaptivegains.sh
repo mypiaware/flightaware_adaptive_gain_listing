@@ -4,7 +4,7 @@
 # https://github.com/mypiaware/flightaware_adaptive_gain_listing
 
 AGCMD="/usr/local/bin/adaptivegains"
-URL="https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/install_adaptivegains.sh"
+URL="https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/adaptivegains.sh"
 CHECKSUM="ea3693fd9e88064cd95e9a462abeacf2"  # MD5 Checksum of 'adaptivegains.sh' (verson 2.0).  [Needs to be all lowercase]
 LATESTVERSION="2.0"
 
