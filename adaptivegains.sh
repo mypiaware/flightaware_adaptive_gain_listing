@@ -2,9 +2,9 @@
 
 # Script to display the adaptive gain values used by FlightAware's dump1090-fa ver 6.0 and higher if the Adaptive Gain mode is enabled.
 # https://github.com/mypiaware/flightaware_adaptive_gain_listing/
-# Version 1.2
+# Version 2.0
 
-VERSION="1.2"
+VERSION="2.0"
 
 SCRIPTNAME=`basename "$0"`  # Get the name of this script in the event it has been changed from the default name of 'adaptivegains'.
 
@@ -21,8 +21,11 @@ if [[ $1 =~ ^-\?$ ]] || [[ $1 =~ ^--?help$ ]]; then
 fi
 
 # Check if dump1090-fa is installed and its version is at least 6.0.
-if  ! [[ $(dump1090-fa --version 2> /dev/null) =~ dump1090-fa[[:space:]]+[678] ]]; then
-   printf "\033[1;31mdump1090-fa version 6.x, 7.x or 8.x must be installed!\033[0m\n"
+if [[ $(dump1090-fa --version 2> /dev/null) =~ dump1090-fa[[:space:]]+([[:digit:]]+)\.[[:digit:]]+ ]]; then
+   DUMP_VERSION=${BASH_REMATCH[1]}
+fi
+if [ -z $DUMP_VERSION ] || [ $DUMP_VERSION -lt 6 ]; then
+   printf "\033[1;31mdump1090-fa version 6.0 or higher must be installed!\033[0m\n"
    exit 1
 fi
 
