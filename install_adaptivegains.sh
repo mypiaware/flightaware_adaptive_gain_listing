@@ -5,7 +5,7 @@
 
 AGCMD="/usr/local/bin/adaptivegains"
 URL="https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/install_adaptivegains.sh"
-CHECKSUM="5dc4de162b463ec06704d133a7d5087e"  # MD5 Checksum of 'adaptivegains.sh' (verson 2.0).  [Needs to be all lowercase]
+CHECKSUM="ea3693fd9e88064cd95e9a462abeacf2"  # MD5 Checksum of 'adaptivegains.sh' (verson 2.0).  [Needs to be all lowercase]
 LATESTVERSION="2.0"
 
 if [ -f "$AGCMD" ] && [[ $(md5sum "$AGCMD") =~ $CHECKSUM ]]; then
