@@ -2,9 +2,9 @@
 
 # A script to display the adaptive gain values used by FlightAware's dump1090-fa ver 6.0 and higher if the Adaptive Gain mode is enabled.
 # https://github.com/mypiaware/flightaware_adaptive_gain_listing/
-# Version 2.0
+# Version 2.01
 
-VERSION="2.0"
+VERSION="2.01"
 
 SCRIPTNAME=`basename "$0"`  # Get the name of this script in the event it has been changed from the default name of 'adaptivegains'.
 
@@ -15,7 +15,7 @@ if [[ $1 =~ ^-\?$ ]] || [[ $1 =~ ^--?help$ ]]; then
    printf "   \033[1m$SCRIPTNAME\033[0m\n\n"
    printf "To limit the number of displayed lines:\n"
    printf "   \033[1m$SCRIPTNAME -#\033[0m  (# is the number of lines to limit)\n\n"
-   printf "\033[0;33mFor more help:\n"
+   printf "\033[1;34mFor more help:\n"
    printf "https://github.com/mypiaware/flightaware_adaptive_gain_listing/\033[0m\n"
    exit 0
 fi
