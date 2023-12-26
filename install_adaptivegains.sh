@@ -5,21 +5,21 @@
 
 AGCMD="/usr/local/bin/adaptivegains"
 URL="https://github.com/mypiaware/flightaware_adaptive_gain_listing/raw/main/adaptivegains.sh"
-CHECKSUM="ea3693fd9e88064cd95e9a462abeacf2"  # MD5 Checksum of 'adaptivegains.sh' (verson 2.0).  [Needs to be all lowercase]
-LATESTVERSION="2.0"
+CHECKSUM="a938f205f520119e74045a2b9c39beee"  # MD5 Checksum of 'adaptivegains.sh' (verson 2.01).  [Needs to be all lowercase]
+LATESTVERSION="2.01"
 
 if [ -f "$AGCMD" ] && [[ $(md5sum "$AGCMD") =~ $CHECKSUM ]]; then
-   printf "The installed version of 'adaptivegains' is the latest version (version $LATESTVERSION).\n"
+   printf "\033[1;34mThe installed version of 'adaptivegains' is the latest version (version $LATESTVERSION).\033[0m\n"
    exit 0
 elif [ -f "$AGCMD" ] && [[ ! $(md5sum "$AGCMD") =~ $CHECKSUM ]]; then
-   while ! [[ $USERCHOICE =~ ^[YyNn]$ ]]; do printf "Download & update the 'adaptivegains' command? [y/n]: "; read USERCHOICE; done
-   ACTION="update"
+   while ! [[ $USERCHOICE =~ ^[YyNn]$ ]]; do printf "\033[1;33mDownload & update the 'adaptivegains' command? [y/n]:\033[0m "; read USERCHOICE; done
+   if [[ $USERCHOICE =~ [Yy] ]]; then ACTION="update"; else exit 0; fi
 elif ! [ -f "$AGCMD" ]; then
-   while ! [[ $USERCHOICE =~ ^[YyNn]$ ]]; do printf "Download & install the 'adaptivegains' command? [y/n]: "; read USERCHOICE; done
-   ACTION="install"
+   while ! [[ $USERCHOICE =~ ^[YyNn]$ ]]; do printf "\033[1;33mDownload & install the 'adaptivegains' command? [y/n]:\033[0m "; read USERCHOICE; done
+   if [[ $USERCHOICE =~ [Yy] ]]; then ACTION="install"; else exit 0; fi
 else
-   printf "Unknown error occurred!\n";
-   exit 3
+   printf "Unknown error occurred!\n"
+   exit 3  # Script should never reach this point.
 fi
 
 if [ $ACTION = "update" ]; then
@@ -30,7 +30,7 @@ if [ $ACTION = "update" ]; then
    if [ -f "$AGCMD" ] && [[ $(md5sum "$AGCMD") =~ $CHECKSUM ]]; then
       sudo chmod +x "$AGCMD"
       sudo rm -f "${AGCMD}".old
-      printf "\033[1;32mSUCCESS: The 'adaptivegains' command was updated!\033[0m\n\n"
+      printf "\033[1;32mSUCCESS: The 'adaptivegains' command was updated to version $LATESTVERSION!\033[0m\n\n"
       exit 0
    else
       printf "\033[1;31mERROR: Failure trying to update the 'adaptivegains' command!\033[0m\n\n"
@@ -45,7 +45,7 @@ if [ $ACTION = "install" ]; then
    printf "\n"
    if [ -f "$AGCMD" ] && [[ $(md5sum "$AGCMD") =~ $CHECKSUM ]] ; then
       sudo chmod +x "$AGCMD"
-      printf "\033[1;32mSUCCESS: The 'adaptivegains' command was installed!\033[0m\n\n"
+      printf "\033[1;32mSUCCESS: The 'adaptivegains' command (version $LATESTVERSION) was installed!\033[0m\n\n"
       exit 0
    else
       printf "\033[1;31mERROR: Failure trying to install the 'adaptivegains' command!\033[0m\n\n"
@@ -53,4 +53,5 @@ if [ $ACTION = "install" ]; then
    fi
 fi
 
+printf "Unknown error occurred!\n"
 exit 4  # Script should never reach this point.
